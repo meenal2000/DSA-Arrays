@@ -20,4 +20,19 @@ long long maxProduct(int *arr, int n) {
           return maxProd;
 	}
 
-// O(n)
+// O(n) using the concept of keeping track of maxOverall , maxEndingHere , minEndingHere
+
+long long maxProduct(int *arr, int n) {
+          long long int maxOverall = arr[0];
+          long long int maxEndingHere = arr[0];
+          long long int minEndingHere = arr[0];
+          for(int i=1; i<n; ++i)
+          {
+              long long int tmp = maxEndingHere;
+              maxEndingHere = max(max(maxEndingHere*arr[i]*1LL,minEndingHere*arr[i])*1LL,arr[i]*1LL);
+              minEndingHere = min(min(tmp*arr[i]*1LL,minEndingHere*arr[i])*1LL,arr[i]*1LL);
+              maxOverall = max(maxEndingHere,maxOverall);
+          }
+          return maxOverall;
+	}
+
