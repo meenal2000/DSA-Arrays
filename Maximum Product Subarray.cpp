@@ -38,3 +38,42 @@ long long maxProduct(int *arr, int n) {
           return maxOverall;
 	}
 
+// O(n) using two way traversal - U need to keep an additional isZero to check if zero occurs . eg. -> -3,0,-4; 
+//  maxfwd = -4, maxbwd = -4, but ans is zero
+
+int maxProduct(vector<int>& arr) {
+          int maxtillnow = 1;
+          int maxfwd = INT_MIN;
+          int maxbwd = INT_MIN;
+          int n = arr.size();
+          bool isZero = 0;
+          for(int i=0; i<n; ++i)
+          {
+              if(arr[i]==0)
+              {
+                  isZero = 1;
+              }
+              maxtillnow *= arr[i];
+              if(maxtillnow == 0)
+              {
+                  maxtillnow = 1;
+                  continue;
+              }
+              maxfwd = max(maxfwd,maxtillnow);
+          }
+          maxtillnow = 1;
+          for(int i=n-1; i>=0; --i)
+          {
+              maxtillnow *= arr[i];
+              if(maxtillnow == 0)
+              {
+                  maxtillnow = 1;
+                  continue;
+              }
+              maxbwd = max(maxbwd,maxtillnow);
+          }
+            if(isZero)
+                return max(0,max(maxfwd,maxbwd));
+            return(max(maxfwd,maxbwd));
+    }
+
