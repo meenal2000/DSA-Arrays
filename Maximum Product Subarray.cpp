@@ -3,6 +3,8 @@
 // O(n3) using normal subarray making
 
 // O(n2) using advanced subarray making
+
+// Questions to ask - Should the product of an empty subarray be considered zero ? If yes , make necessary changes.
 long long maxProduct(int *arr, int n) {
           long long int maxProd = LONG_MIN;
           for(int i=0; i<n; ++i)
